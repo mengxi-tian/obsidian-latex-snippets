@@ -3,6 +3,8 @@
 	{trigger: "mk", replacement: "$$0$", options: "tA"},
 	{trigger: "dm", replacement: "$$\n$0\n$$", options: "tAw"},
 	{trigger: "beg", replacement: "\\begin{$0}\n$1\n\\end{$0}", options: "mA"},
+    {trigger: "A", replacement: "\\begin{align}\n${VISUAL}\n\\end{align}", options: "mA", description: "Align visual"}, // new from github
+
 
     // Dashes
 	// {trigger: "--", replacement: "–", options: "tA"},
@@ -287,6 +289,21 @@
     {trigger: "PP", replacement: "\\mathbb{P}", options: "mA"},
     {trigger: "Ll", replacement: "\\mathcal{L}",options: "mA"},
     {trigger: "Pp", replacement: "\\mathcal{P}", options: "mA"},
+    {trigger: "CEF", replacement: "\\mathbb{E}(Y|\\vec{X})", options:"mA"},
+    //Math
+    {trigger: "Rp", replacement: "\\mathbb{R}^{p}", options: "mA"},
+    {trigger: "Rp", replacement: "\\mathbb{R}^{n}", options: "mA"},
+
+    { trigger: "set",  replacement: "\\{ $0 \\}$1", options: "mA"},     // Set braces: \{ ... \}
+    { trigger: "lr{", replacement: "\\left\\{ $0 \\right\\} $1", options: "mA"},     // Auto-sized set braces: \left\{ … \right\}
+    { trigger: "I",    replacement: "\\{ ${VISUAL} \\}", options: "mAv", description: "Wrap selection with \\{\\}" },   // Visual wrapper: select text, press I → \mathbf{1}_{\{ selected \}}
+
+    // Indicator with set condition:  \mathbf{1}_{\{ ... \}}
+    { trigger: "ind", replacement: "\\mathbf{1}_{\\{ $0 \\}}$1", options: "mAw", description: "Indicator \\mathbf{1}_{\\{\\cdot\\}}" },
+    // Visual wrapper for an existing condition: select text, press 1
+    { trigger: "1",   replacement: "\\mathbf{1}_{\\{ ${VISUAL} \\}}", options: "mAv", description: "Wrap selection in indicator" },
+    // Subscript-only version (no braces): \mathbf{1}_{A}
+    { trigger: "1_",  replacement: "\\mathbf{1}_{${0:A}}$1", options: "mAw", description: "Indicator with simple subscript" },
 
     // Snippet replacements can have placeholders.
 	{trigger: "tayl", replacement: "${0:f}(${1:x} + ${2:h}) = ${0:f}(${1:x}) + ${0:f}'(${1:x})${2:h} + ${0:f}''(${1:x}) \\frac{${2:h}^{2}}{2!} + \\dots$3", options: "mA", description: "Taylor expansion"},
